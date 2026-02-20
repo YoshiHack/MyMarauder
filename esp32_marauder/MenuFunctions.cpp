@@ -2490,6 +2490,14 @@ void MenuFunctions::RunSetup()
     this->drawStatusBar();
     wifi_scan_obj.StartScan(BT_SCAN_AIRTAG_MON, TFT_WHITE);
   });
+  this->addNodes(&bluetoothSnifferMenu, "Watch Tracker", TFTBLUE, NULL, BLUETOOTH_SNIFF, [this]() {
+    display_obj.clearScreen();
+    this->drawStatusBar();
+    // We call your custom detector here
+    watchDetector.start(); 
+    // This tells the UI we are in a special 'Watch' mode
+    wifi_scan_obj.StartScan(BT_SCAN_WATCH, TFT_BLUE); 
+  });
   #ifdef HAS_GPS
     if (gps_obj.getGpsModuleStatus()) {
       this->addNodes(&bluetoothSnifferMenu, "BT Wardrive", TFTCYAN, NULL, BLUETOOTH_SNIFF, [this]() {

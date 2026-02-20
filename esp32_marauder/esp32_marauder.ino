@@ -368,6 +368,7 @@ void loop()
     display_obj.main(wifi_scan_obj.currentScanMode);
   #endif
   wifi_scan_obj.main(currentTime);
+  watchDetector.main();
 
   #ifdef HAS_GPS
     gps_obj.main();
